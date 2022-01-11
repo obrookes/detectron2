@@ -123,11 +123,7 @@ class InferenceAction(Action):
     @classmethod
     def _get_input_file_list(cls: type, input_spec: str):
         if os.path.isdir(input_spec):
-            file_list = [
-                os.path.join(input_spec, fname)
-                for fname in os.listdir(input_spec)
-                if os.path.isfile(os.path.join(input_spec, fname))
-            ]
+            file_list = glob.glob(f"{input_spec}/**/*.jpg", recursive=True)
         elif os.path.isfile(input_spec):
             file_list = [input_spec]
         else:
